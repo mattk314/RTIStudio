@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class ToDoManager extends AppCompatActivity {
@@ -33,17 +36,6 @@ public class ToDoManager extends AppCompatActivity {
         new GetToDoTask(instance).execute(token);
 
 
-        ArrayList<String> itemsToDo = new ArrayList<String>(); //Will be the student object?
-
-        itemsToDo.add(token);
-        itemsToDo.add("testing");
-        itemsToDo.add("hello");
-        itemsToDo.add("12345");
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, itemsToDo);
-
-        toDoListView.setAdapter(arrayAdapter);
-
         backToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,5 +43,27 @@ public class ToDoManager extends AppCompatActivity {
                 instance.startActivity(i);
             }
         });
+    }
+
+    public void listAdd (JSONArray jsonArray){
+
+
+        ArrayList<String> itemsToDo = new ArrayList<String>(); //Will be the student object?
+
+        try {
+            itemsToDo.add(jsonArray.getJSONObject(0).getString("course_name") + "" );
+
+            itemsToDo.add("hello");
+            itemsToDo.add("12345");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, itemsToDo);
+
+        toDoListView.setAdapter(arrayAdapter);
+
+
     }
 }

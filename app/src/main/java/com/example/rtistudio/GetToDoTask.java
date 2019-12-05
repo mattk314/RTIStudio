@@ -3,12 +3,18 @@ package com.example.rtistudio;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Struct;
 
 
 public class GetToDoTask extends AsyncTask<String, Void, String> {
@@ -84,7 +90,15 @@ public class GetToDoTask extends AsyncTask<String, Void, String> {
 
 
   protected void onPostExecute(String result){
-    ToDoManager.toDoList = result;
+
     Log.d("GetToDoTask returns", result);
+
+    try {
+      activity.listAdd( new JSONObject(result).getJSONArray("courses"));
+
+    }catch (JSONException err){
+      Log.d("Error", err.toString());
+    }
   }
+
 }
