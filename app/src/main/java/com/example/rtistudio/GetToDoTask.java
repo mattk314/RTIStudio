@@ -25,7 +25,7 @@ public class GetToDoTask extends AsyncTask<String, Void, String> {
     this.activity=a;
   }
 
-
+  String token;
 
   @Override
   protected String doInBackground(String... strings) {
@@ -91,7 +91,7 @@ public class GetToDoTask extends AsyncTask<String, Void, String> {
 
   protected void onPostExecute(String result){
 
-    Log.d("GetToDoTask returns", result);
+    Log.d("JSON result is", result);
 
     try {
       activity.listAdd( new JSONObject(result).getJSONArray("courses"));

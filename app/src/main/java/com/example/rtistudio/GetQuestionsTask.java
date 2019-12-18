@@ -3,32 +3,30 @@ package com.example.rtistudio;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Struct;
 
 
-public class GetTokenTask extends AsyncTask<String, Void, String> {
-
-    public MainActivity activity;
-
-    public GetTokenTask(MainActivity a){
-        this.activity=a;
-    }
-
+public class GetQuestionsTask extends AsyncTask<String, Void, String> {
 
 
     @Override
     protected String doInBackground(String... strings) {
 
-
-
         // Create data variable for sent values to server
 
-        String data = "email=" + strings[0] + "&password=" + strings[1];
+        // GONNA NEED TO CHANGE THIS TO TOKEN AND COURSE ID
+        String data = "token=" + strings[0] + "&id=" + strings[1];
 
         String text = "";
         BufferedReader reader = null;
@@ -37,7 +35,7 @@ public class GetTokenTask extends AsyncTask<String, Void, String> {
         try
         {
             // Defined URL  where to send data
-            URL url = new URL("https://rtistudio.com/api/token");
+            URL url = new URL("https://rtistudio.com/api/questions");
 
             // Send POST data request
 
@@ -67,7 +65,6 @@ public class GetTokenTask extends AsyncTask<String, Void, String> {
         catch(Exception e)
         {
             e.printStackTrace();
-            text += " Exception ex 1";
         }
         finally
         {
@@ -87,16 +84,16 @@ public class GetTokenTask extends AsyncTask<String, Void, String> {
 
 
     protected void onPostExecute(String result){
-        if(result.contains("invalid login")){
-            activity.incorrectLogin();
-        }
-        else {
 
-            Log.d("TOKEN result is", result);
-            Intent intent = new Intent(activity, ToDoManager.class);
-            intent.putExtra("com.example.RTIStudio.theToken", result);
-            activity.startActivity(intent);
-            // activity.setToken(result);
-        }
+        Log.d("JSON result", "Result for questions is: " + result);
+
+
+        //Start questions activity and send "result" JSON string so questionsMenu can show questions to be answered.
+
+//        Intent intent = new Intent(activity, QuestionsMenu.class);
+//        intent.putExtra("com.example.RTIStudio.theToken", result);
+//        activity.startActivity(intent);
+
     }
+
 }
