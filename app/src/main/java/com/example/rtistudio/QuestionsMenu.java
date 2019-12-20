@@ -11,6 +11,7 @@ public class QuestionsMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions_menu);
 
+        String questionsJSON = getIntent().getExtras().getString("com.example.RTIStudio.questions");
 
 
 

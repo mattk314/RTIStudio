@@ -20,6 +20,12 @@ import java.sql.Struct;
 public class GetQuestionsTask extends AsyncTask<String, Void, String> {
 
 
+    public ToDoManager activity;
+
+    public GetQuestionsTask(ToDoManager a){
+        this.activity=a;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
 
@@ -80,19 +86,19 @@ public class GetQuestionsTask extends AsyncTask<String, Void, String> {
         }
 
         return text;
-    } 
+    }
 
 
     protected void onPostExecute(String result){
 
-        Log.d("JSON result", "Result for questions is: " + result);
+        Log.d("JSON Questions result", "Result for questions is: " + result);
 
 
         //Start questions activity and send "result" JSON string so questionsMenu can show questions to be answered.
 
-//        Intent intent = new Intent(activity, QuestionsMenu.class);
-//        intent.putExtra("com.example.RTIStudio.theToken", result);
-//        activity.startActivity(intent);
+        Intent intent = new Intent(activity, QuestionsMenu.class);
+        intent.putExtra("com.example.RTIStudio.questions", result);
+        activity.startActivity(intent);
 
     }
 

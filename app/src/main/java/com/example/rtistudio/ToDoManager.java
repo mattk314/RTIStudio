@@ -102,9 +102,9 @@ public class ToDoManager extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Log.d("Clicked course id",courseId);
+                Log.d("Clicked course id", courseId);
 
-                new GetQuestionsTask().execute(token, courseId);
+                new GetQuestionsTask(instance).execute(token, courseId);
 
             }
         });
