@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/questionsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/cardview_dark_background"
+        android:text="TextView" />
+
+    <Switch
+        android:id="@+id/yesnoAnswerSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="200dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/answerEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="answer"
+        android:inputType="textPersonName"
+        android:textColor="@color/cardview_dark_background"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+    <SeekBar
+        android:id="@+id/answerSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+</LinearLayout>
