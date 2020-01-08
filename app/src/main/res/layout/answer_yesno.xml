@@ -27,11 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="answer"
         android:inputType="textPersonName"
-        android:textColor="@color/cardview_dark_background"
         android:paddingLeft="10dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:textColor="@color/cardview_dark_background" />
 
     <SeekBar
         android:id="@+id/answerSeekBar"

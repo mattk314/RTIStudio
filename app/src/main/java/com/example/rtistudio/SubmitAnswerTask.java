@@ -17,14 +17,15 @@ import java.net.URLConnection;
 import java.sql.Struct;
 
 
-public class GetQuestionsTask extends AsyncTask<String, Void, String> {
+public class SubmitAnswerTask extends AsyncTask<String, Void, String> {
 
-
-    public ToDoManager activity;
-
-    public GetQuestionsTask(ToDoManager a){
+    public SubmitAnswerTask(QuestionsMenu a){
         this.activity=a;
     }
+
+
+    public QuestionsMenu activity;
+
 
     String token = "";
 
@@ -94,15 +95,7 @@ public class GetQuestionsTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result){
 
-        Log.d("JSON Questions result", "Result for questions is: " + result);
-
-
-        //Start questions activity and send "result" JSON string so questionsMenu can show questions to be answered.
-
-        Intent intent = new Intent(activity, QuestionsMenu.class);
-        intent.putExtra("com.example.RTIStudio.questions", result);
-        intent.putExtra("com.example.RTIStudio.tokenFromGetQuestions", token);
-        activity.startActivity(intent);
+        // Probably go back to the list of courses
 
     }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class QuestionsMenu extends AppCompatActivity {
+
 
     ListView questionsListView;
     Button saveButton;
@@ -61,6 +63,9 @@ public class QuestionsMenu extends AppCompatActivity {
 
         instance = this;
 
+        final String token = getIntent().getExtras().getString("com.example.RTIStudio.tokenFromGetQuestions");
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,8 +74,8 @@ public class QuestionsMenu extends AppCompatActivity {
 
                 //need to make this work better
 
-//                Intent i = new Intent(getApplicationContext(), ToDoManager.class);
-//                instance.startActivity(i);
+                Intent i = new Intent(getApplicationContext(), ToDoManager.class);
+                instance.startActivity(i);
             }
         });
 
@@ -82,8 +87,18 @@ public class QuestionsMenu extends AppCompatActivity {
 
                 Log.d("Click", "Save button clicked");
 
+                Log.e("answer items?", "hvjhv: " + ((EditText) findViewById(R.id.answerEditText)).getText().toString());
+
+                for(int i=0;i<questionsListView.getAdapter().getCount();i++) {
+
+                    //questionsListView.getAdapter().getView(i,R.layout.answer_yesno,questionsListView)
+                    new SubmitAnswerTask(instance).execute(token, "THIS WILL BE THE ID", "THIS WILL BE THE ANSWER");
+                }
             }
         });
 
     }
 }
+
+//Do this to fix the thing with the edittext weird thing:
+// https://vikaskanani.wordpress.com/2011/07/27/android-focusable-edittext-inside-listview/

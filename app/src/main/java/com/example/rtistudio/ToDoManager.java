@@ -19,7 +19,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ToDoManager extends AppCompatActivity {
-    static String toDoList;
     String token;
 
     ToDoManager instance;
