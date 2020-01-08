@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         signinButton = (Button) findViewById(R.id.signinButton);
         messageTextView = (TextView) findViewById(R.id.errorLogTextView);
 
+        //TODO load credentials if they exist
 
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
     public void incorrectLogin(){
         //set text box thing to "invalid things"
         messageTextView.setText("Invalid Login");
+    }
+
+    public void SaveCredentials(){
+        //Save username and password because login was successful
+        //TODO this needs some research but this is where you would do it
     }
 
 }

@@ -14,12 +14,14 @@
         android:textColor="@color/cardview_dark_background"
         android:text="TextView" />
 
-    <Switch
+    <EditText
         android:id="@+id/answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="200dp"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:textColor="@color/cardview_dark_background" />
 
 </LinearLayout>

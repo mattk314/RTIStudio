@@ -1,6 +1,7 @@
 package com.example.rtistudio;
 
 import android.content.Intent;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.os.AsyncTask;
 import android.util.Log;
 import java.io.BufferedReader;
@@ -97,6 +98,8 @@ public class GetTokenTask extends AsyncTask<String, Void, String> {
             intent.putExtra("com.example.RTIStudio.theToken", result);
             activity.startActivity(intent);
             // activity.setToken(result);
+
+            activity.SaveCredentials();
         }
     }
 }

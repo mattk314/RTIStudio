@@ -30,9 +30,7 @@ public class CustomAdapter extends ArrayAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        /*LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.answer_yesno, null);
         TextView textView = view.findViewById(R.id.questionsName);
         textView.setText(questions[position]);
@@ -57,7 +55,8 @@ public class CustomAdapter extends ArrayAdapter {
             answerEditText.setVisibility(View.GONE);
         }
 
-        return view;
+        return view;*/
+        return null;
     }
 
 }
