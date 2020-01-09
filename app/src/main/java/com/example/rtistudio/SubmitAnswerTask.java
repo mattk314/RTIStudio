@@ -36,7 +36,7 @@ public class SubmitAnswerTask extends AsyncTask<String, Void, String> {
 
         token = strings[0];
 
-        String data = "token=" + token + "&id=" + strings[1];
+        String data = "token=" + token + "&id=" + strings[1] + "&answer=" + strings[2];
 
         String text = "";
         BufferedReader reader = null;
@@ -45,7 +45,7 @@ public class SubmitAnswerTask extends AsyncTask<String, Void, String> {
         try
         {
             // Defined URL  where to send data
-            URL url = new URL("https://rtistudio.com/api/questions");
+            URL url = new URL("https://rtistudio.com/api/answer");
 
             // Send POST data request
 
@@ -71,6 +71,8 @@ public class SubmitAnswerTask extends AsyncTask<String, Void, String> {
 
 
             text = sb.toString();
+
+            Log.d("API response", sb.toString());
         }
         catch(Exception e)
         {
@@ -89,13 +91,15 @@ public class SubmitAnswerTask extends AsyncTask<String, Void, String> {
             }
         }
 
-        return text;
+        return "" + strings[1]+ ", " + strings[2];
     }
 
+    protected void onPostExecute(String idAndAnswer){
 
-    protected void onPostExecute(String result){
+        Log.d("submitAnswerTask return", idAndAnswer);
 
         // Probably go back to the list of courses
+        //No don't do that, do that when the loop in QuestionsMenu is finished.
 
     }
 

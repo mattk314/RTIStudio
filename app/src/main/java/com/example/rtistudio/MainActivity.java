@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("Gets Here", "Successfully sends down email and password to getToken Class");
                 }
                 else{
-                    messageTextView.setText("You must enter your email and password");
+                    messageTextView.setText("Invalid Login");
                     //set text box thing to "Invalid things"
                 }
 

@@ -29,6 +29,8 @@ import java.util.ArrayList;
 public class QuestionsMenu extends AppCompatActivity {
 
     ArrayList<Integer> AnswerTypes;
+    ArrayList<Integer> QuestionIds;
+    ArrayList<String> Answers;
     LinearLayout questionsListView;
     Button saveButton;
     Button backButton;
@@ -46,6 +48,8 @@ public class QuestionsMenu extends AppCompatActivity {
 
         ArrayList<String> QuestionsListItems = new ArrayList<String>();
         AnswerTypes = new ArrayList<Integer>();
+        QuestionIds = new ArrayList<Integer>();
+        Answers = new ArrayList<String>();
 
 
         //QuestionsListItems is set to an arraylist of the questions
@@ -56,6 +60,8 @@ public class QuestionsMenu extends AppCompatActivity {
             for(int i=0; i<questionsArray.length();i++) {
                 QuestionsListItems.add(questionsArray.getJSONObject(i).getString("question"));
                 AnswerTypes.add(questionsArray.getJSONObject(i).getInt("type"));
+                QuestionIds.add(questionsArray.getJSONObject(i).getInt("id"));
+                Answers.add(questionsArray.getJSONObject(i).getString("todays_answer"));
             }
 
 
@@ -63,7 +69,7 @@ public class QuestionsMenu extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Make question views
+        //Makes Question Views
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for(int i=0;i< QuestionsListItems.size();i++) {
             View view = null;
@@ -72,18 +78,29 @@ public class QuestionsMenu extends AppCompatActivity {
                 //text
                 view = inflater.inflate(R.layout.answer_textbox, null);
                 EditText answerEditText = view.findViewById(R.id.answer);
+
+                //Fill with the previous answer
+                answerEditText.setText(Answers.get(i));
+
                 //TODO Load the answers into these boxes if the question has already been answered
+
             }
             if (AnswerTypes.get(i) == 1) {
                 //slider
                 view = inflater.inflate(R.layout.answer_slider, null);
                 SeekBar answerSeekBar = view.findViewById(R.id.answer);
 
+                //Fill with the previously answered
+                answerSeekBar.setProgress(Integer.parseInt(Answers.get(i)));
+
             }
             if (AnswerTypes.get(i) == 2) {
                 //toggle
                 view = inflater.inflate(R.layout.answer_yesno, null);
                 Switch yesnoAnswerSwitch = view.findViewById(R.id.answer);
+
+                //Fill with the previously answered
+                yesnoAnswerSwitch.setChecked(Answers.get(i).equals("true"));
             }
 
             TextView textView = view.findViewById(R.id.questionsName);
@@ -121,20 +138,36 @@ public class QuestionsMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Click", "Save button clicked");
 
+                String answer = "";
+
                 for(int i = 0; i< questionsListView.getChildCount(); i++){
                     if(AnswerTypes.get(i) == 0){
                         EditText editText = questionsListView.getChildAt(i).findViewById(R.id.answer);
                         Log.e("text answer", editText.getText().toString());
+                        answer = editText.getText().toString();
                     }
                     if(AnswerTypes.get(i) == 1){
                         SeekBar slider = questionsListView.getChildAt(i).findViewById(R.id.answer);
                         Log.e("slider answer", slider.getProgress() + "");
+                        answer = slider.getProgress() + "";
                     }
                     if(AnswerTypes.get(i) == 2){
                         Switch toggle = questionsListView.getChildAt(i).findViewById(R.id.answer);
                         Log.e("toggle answer", toggle.isChecked() ? "true" : "false");
+                        answer = toggle.isChecked() ? "true" : "false";
                     }
+
+                    new SubmitAnswerTask(instance).execute(token, QuestionIds.get(i).toString(), answer);
+                    //Make calls to submitAnswerTask in this loop? One for each answer.
                 }
+
+                Log.d("End", "Loop ends");
+
+                //go back to toDoManager
+
+                Intent i = new Intent(getApplicationContext(), ToDoManager.class);
+                i.putExtra("com.example.RTIStudio.theToken", token);
+                instance.startActivity(i);
 
                 //TODO save this data
             }
